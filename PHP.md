@@ -214,5 +214,7 @@ Cookies jsou přenášeny pomocí hlaviček.
 `unset($_COOKIE[name])` - zrušení cookie
 
 *pokročilé práce*
+
 `time()` - služí k určení expirace
+
 `urlencode() / urldecode()` - kódování a dekódování cookies
