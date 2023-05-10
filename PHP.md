@@ -202,4 +202,17 @@ readfile('path/to/file.pdf');
 
 Slouží k ukládání informací o uživateli z předchozích interakcí. Udrží uživatele přihlášeno, sledují návštěvnost, personalizují obsah atd.
 
-Cookies jsou přenášeny pomocí hlaviček
+Cookies jsou přenášeny pomocí hlaviček.
+
+*základní práce*
+
+`setcookie(name, value, expire, path, domain, secure, httponly)` - funkce pro vytvoření cookie s danými parametry, které nejsou povinné
+`$_COOKIE[prom]` - přístup k hodnotě cookie s daným názvem
+
+`isset($_COOKIE[prom])` - ověření zda existuje
+
+`unset($_COOKIE[name])` - zrušení cookie
+
+*pokročilé práce*
+`time()` - služí k určení expirace
+`urlencode() / urldecode()` - kódování a dekódování cookies
