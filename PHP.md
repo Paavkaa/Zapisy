@@ -6,12 +6,15 @@
     - [Základní příkazy](#základní-příkazy)
     - [Definice prvků](#definice-prvků)
   - [HTTP POŽADAVKY](#http-požadavky)
-      - [Metoda](#metoda)
-      - [URL](#url)
-      - [Hlavičky](#hlavičky)
+    - [Metoda](#metoda)
+    - [URL](#url)
+    - [Hlavičky](#hlavičky)
   - [ŘETĚZCE](#řetězce)
-      - [funkce pro práci s řetězci](#funkce-pro-práci-s-řetězci)
+    - [funkce pro práci s řetězci](#funkce-pro-práci-s-řetězci)
   - [POLE](#pole)
+    - [Indexové](#indexové)
+    - [Asociativní](#asociativní)
+    - [Funkce pro práci s poli](#funkce-pro-práci-s-poli)
   - [FUNKCE](#funkce)
   - [TŘÍDY](#třídy)
   - [SESSION](#session)
@@ -25,8 +28,6 @@
 > PHP probíhá na straně serveru
 >
 > Slouží k propojení webu s databází
-> 
-> Syntaxe velmi podobna jazyku C
 
 ## ZÁKLADY
 **Vloženi PHP kódu do HTML**
@@ -74,7 +75,7 @@ slouží k komunikaci mezi klientem a serverem
 
 ---
 
-#### Metoda
+### Metoda
 
 `$_GET` - získává informace ze serveru
 
@@ -90,26 +91,15 @@ slouží k komunikaci mezi klientem a serverem
 
 ---
 
-#### URL
+### URL
 
-`parse_url()` - rozdělí URL na jednotlivé části (protokol, doménu, cestu, atd.), které vrátí v poli
-
-`urlencode()` - zakóduje řetězec pro použití v URL, nahradí
- speciální znaky přepíše na hexadecimální
-
-`http_build_query()` - vytvoří řetězec s parametry pro GET na základě asociativného pole
-
-`$_GET[]` - parametry předané v URL po otazníku (např. ?parametr=hodnota)
-
-`$_SERVER['REQUEST_URI']` - obsahuje cestu k aktuálnímu skriptu
-
-`rawurlencode()` - zákoduje string pro URL, ale zachová důležité speciální znaky
-
-`basename()` - vrátí název souboru/adresáře z dané cesty
-
-`dirname()` - vrátí adresář z dané cesty
-
-<br>
+|Funkce|Popis|
+|:---:|:---:|
+|parse_url()|rozdělí URL na části|
+|http_build_query()|vytvoří řetězec s parametry pro GET|
+|$_GET[]| parametry předané v URL po otazníku|
+|urlencode() / rawurlencode()|zakóduje řetězec pro použití v URL|
+|$_SERVER['REQUEST_URI']|obsahuje cestu k aktuálnímu skriptu|
 
 **Ukázky kódu**
 
@@ -148,7 +138,7 @@ $url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
 ---
 
-#### Hlavičky
+### Hlavičky
 
 `header()` - nastavuje hlavičku HTTP (např. přesměrování, nebo informace COOKIES)
 
@@ -200,13 +190,73 @@ readfile('path/to/file.pdf');
 $num = 123;
 $string = "Číslo je:" . $num;
 ```
-#### funkce pro práci s řetězci
+### funkce pro práci s řetězci
 
-``
+|Funkce|Popis|
+|:---:|:---:|
+|strlen($str)|délka řetězce|
+|trim($str)|odstraní bílé znaky|
+|htmlspecialchars()|konvertuje speciální znaky HTML (zabraňuje XSS útokům)|
+|strtlower($str)|převede na malé písmena|
+|ucfirst($str)|převede první písmeno na velké|
+|ucwords($str)|převede první písmena všech slov na velké|
 
 ## POLE
+>Může být indexové nebo asociativní
+
+### Indexové
+>použíté jsou celočíselné hodnoty
+>nulové indexováním (začíná 0)
+
+`$pole[0] $pole[5]` - k přístupu k datům se používají indexy
+
+### Asociativní
+>umožňuje přiřazení klíče, obvykle se jedná o řetězce, ale můžou to být i jiné dat. typy
+>ukládají se data s názvem (např. jméno, druh, pozice)
+>k hodnotě se přistupuje podle daného klíče
+
+`$pole[klic]`
+
+**Tvorba asociativního pole**
+```php
+$asociativni_pole = array
+(
+  "key1" => "hodnota1"
+  "key2" => "hodnota2"
+  "key3" => "hodnota3"
+);
+```
+
+### Funkce pro práci s poli
+
+|Funkce|Popis|
+|:---:|:---:|
+|count()|počet prvků|
+|array_push() |nová hodnota na konci pole|
+|array_unshift()|nová hodnota na začátek pole|
+|array_merge()|spojí pole|
 
 ## FUNKCE
+
+>vestavěné nebo uživatelské
+>využívá se, když se část kódu opakovaně vyskytuje
+
+*definování funkce*
+```php
+function nazev_funkce()
+{
+  //kód
+  return;
+}
+
+function parametr($a)
+{
+  //kód
+  return
+}
+
+parametr("něco");
+```
 
 ## TŘÍDY
 
