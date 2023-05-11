@@ -1,24 +1,34 @@
 # PHP
 
 - [PHP](#php)
-  - [Úvod](#úvod)
-  - [Základy](#základy)
+  - [ÚVOD](#úvod)
+  - [ZÁKLADY](#základy)
     - [Základní příkazy](#základní-příkazy)
-  - [HTTP požadavky](#http-požadavky)
-      - [**Metoda**](#metoda)
-      - [**URL**](#url)
-      - [**Hlavičky**](#hlavičky)
+    - [Definice prvků](#definice-prvků)
+  - [HTTP POŽADAVKY](#http-požadavky)
+      - [Metoda](#metoda)
+      - [URL](#url)
+      - [Hlavičky](#hlavičky)
+  - [ŘETĚZCE](#řetězce)
+      - [funkce pro práci s řetězci](#funkce-pro-práci-s-řetězci)
+  - [POLE](#pole)
+  - [FUNKCE](#funkce)
+  - [TŘÍDY](#třídy)
   - [SESSION](#session)
+    - [základní práce](#základní-práce)
+    - [práce s daty](#práce-s-daty)
   - [COOKIES](#cookies)
+    - [základní práce](#základní-práce-1)
+    - [pokročilé práce](#pokročilé-práce)
 
-## Úvod
+## ÚVOD
 > PHP probíhá na straně serveru
 >
 > Slouží k propojení webu s databází
 > 
 > Syntaxe velmi podobna jazyku C
 
-## Základy
+## ZÁKLADY
 **Vloženi PHP kódu do HTML**
 
 ```php
@@ -28,6 +38,7 @@
 ```
 
 ### Základní příkazy
+>není case-sensitive
 
 `echo` - výpis na obrazovku
 
@@ -35,17 +46,21 @@
 
 `while, for` - cykly
 
-`function nazev_funkce()` - funkce
+### Definice prvků
+>je case-sensitive
 
-`$prom` - proměnná (není nutné deklarovat dat. typ)
+`$prom` - proměnná (není nutné deklarovat dat. typ, case-se)
 
 `$array = array("apple", "Karel", "Minecraft")` - pole
 
 `$string = "nějaký text"` - řetězec
 
+`function nazev_funkce()` - funkce
+
+`class nazev_tridy` . třída
 <br>
 
-## HTTP požadavky
+## HTTP POŽADAVKY
 
 slouží k komunikaci mezi klientem a serverem
 
@@ -59,7 +74,7 @@ slouží k komunikaci mezi klientem a serverem
 
 ---
 
-#### **Metoda**
+#### Metoda
 
 `$_GET` - získává informace ze serveru
 
@@ -75,7 +90,7 @@ slouží k komunikaci mezi klientem a serverem
 
 ---
 
-#### **URL**
+#### URL
 
 `parse_url()` - rozdělí URL na jednotlivé části (protokol, doménu, cestu, atd.), které vrátí v poli
 
@@ -133,7 +148,7 @@ $url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
 ---
 
-#### **Hlavičky**
+#### Hlavičky
 
 `header()` - nastavuje hlavičku HTTP (např. přesměrování, nebo informace COOKIES)
 
@@ -177,8 +192,29 @@ readfile('path/to/file.pdf');
 >
 >**filename** - název souboru
 
+## ŘETĚZCE
+> Používají se jednoduché nebo dvojité uvozovky
+> Možne kombinovat s jinými dat. typy pomocí `.`
+
+```php
+$num = 123;
+$string = "Číslo je:" . $num;
+```
+#### funkce pro práci s řetězci
+
+``
+
+## POLE
+
+## FUNKCE
+
+## TŘÍDY
+
 ## SESSION
-*základní práce*
+
+`$_SESSION` - superglobální proměnná
+
+### základní práce
 
 `session_start` - vytvoří session
 
@@ -190,7 +226,7 @@ readfile('path/to/file.pdf');
 
 `session_name` - pojmenuje session
 
-*práce s daty*
+### práce s daty
 
 `session_status` - vrací hodnoty
 
@@ -204,7 +240,7 @@ Slouží k ukládání informací o uživateli z předchozích interakcí. Udrž
 
 Cookies jsou přenášeny pomocí hlaviček.
 
-*základní práce*
+### základní práce
 
 `setcookie(name, value, expire, path, domain, secure, httponly)` - funkce pro vytvoření cookie s danými parametry, které nejsou povinné
 `$_COOKIE[prom]` - přístup k hodnotě cookie s daným názvem
@@ -213,7 +249,7 @@ Cookies jsou přenášeny pomocí hlaviček.
 
 `unset($_COOKIE[name])` - zrušení cookie
 
-*pokročilé práce*
+### pokročilé práce
 
 `time()` - služí k určení expirace
 
