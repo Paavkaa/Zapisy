@@ -9,6 +9,7 @@
     - [Metoda](#metoda)
     - [URL](#url)
     - [Hlavičky](#hlavičky)
+  - [API](#api)
   - [ŘETĚZCE](#řetězce)
     - [funkce pro práci s řetězci](#funkce-pro-práci-s-řetězci)
   - [POLE](#pole)
@@ -181,6 +182,54 @@ readfile('path/to/file.pdf');
 >**Content-Disposition** - ovlivňuje jak prohlížeč zobrazí soubor (inline - zobrazit, attachmnet - stáhnout)
 >
 >**filename** - název souboru
+
+## API
+
+> API (Application Programming Interface) je sada definovaných funkcí, protokolů a nástrojů, které umožňují komunikaci a interakci mezi různými softwarovými aplikacemi.
+> 
+> API může být ve formě webového rozhraní (například RESTful API), knihoven nebo sady příkazů a funkcí, které jsou poskytovány programovacím jazykem. API poskytuje definované metody pro získávání, manipulaci a správu dat nebo služeb.
+>
+> API je důležité pro vývoj webových aplikací, mobilních aplikací, integrace s externími službami a mnoho dalších případů, kdy je potřeba propojit a interoperabilita mezi různými systémy.
+
+**Ukázka kódu**
+
+```php
+// Nastavení URL koncového bodu API
+$apiUrl = 'https://api.example.com/data';
+
+// Vytvoření HTTP požadavku
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+// Volitelné: Nastavení parametrů požadavku (např. GET parametry, hlavičky apod.)
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer YOUR_API_KEY',
+]);
+
+// Odeslání požadavku na API a získání odpovědi
+$response = curl_exec($ch);
+
+// Kontrola úspěšnosti požadavku
+if ($response === false) {
+    die('Chyba při komunikaci s API: ' . curl_error($ch));
+}
+
+// Zpracování odpovědi
+$data = json_decode($response, true);
+
+// Kontrola úspěšného získání dat
+if (is_array($data)) {
+    // Data byla úspěšně získána, můžete s nimi dále pracovat
+    // ...
+} else {
+    // Chyba při zpracování odpovědi API
+    // ...
+}
+
+// Uzavření HTTP spojení
+curl_close($ch);
+```
 
 ## ŘETĚZCE
 > Používají se jednoduché nebo dvojité uvozovky
