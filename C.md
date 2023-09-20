@@ -575,3 +575,52 @@ int main() {
     return 0;
 }
 ```
+## Práce se soubory
+
+> umožňuje <stdio.h>
+>
+> umožňuje čtení a zápis
+
+### Ukázka kódu
+
+```c
+
+// otevření souboru
+FILE *soubor;
+soubor = fopen("mojefile.txt", "r"); // Pokud se soubor nepodaří otevřít, není uložena žádna hodnota, proto je NULL
+if (soubor == NULL) {
+    printf("Nepodarilo se otevrit soubor.\n");
+    return 1;
+}
+
+char text[100];
+fscanf(soubor, "%s", text); // Čtení slova ze souboru
+
+fprintf(soubor, "Hello, World!\n"); // Zápis řetězce do souboru
+
+if (feof(soubor)) {
+    printf("Konec souboru dosazen.\n");
+}
+
+fclose(soubor); // Ukončení vazby se souborem
+
+```
+
+**Práce s binárním souborem**
+
+```c
+struct Zaznam {
+    int cislo;
+    char jmeno[50];
+};
+
+// Čtení binárních dat ze souboru
+fread(&zaznam, sizeof(struct Zaznam), 1, soubor);
+
+// Zápis binárních dat do souboru
+fwrite(&zaznam, sizeof(struct Zaznam), 1, soubor);
+```
+`&zaznam` - adresa struktury
+`sizeof(struct Zaznam)` - vrací velikost struktury
+`1` - určuje počet
+`soubor` - specifikuje otevřený soubor, ze kterého budou data čtena
