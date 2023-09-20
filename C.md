@@ -429,19 +429,43 @@ Osoba Jarmila; // deklarace proměnné typu Osoba
 
 #### Struktura ve struktuře
 
-```c
-struct Adresa
-{
-    char ulice[100];
-    char mesto[50];
-};
+> Vnořené struktury umožňují hierarchické organizování dat, což usnadňuje reprezentaci složitých datových modelů
+>
+> Čitelnost a udržovatelnost: Kód se stává čitelnějším, protože struktury ve strukturách lépe odrážejí vztahy mezi daty
 
-struct Osoba
-{
-    int vek;
+```c
+#include <stdio.h>
+#include <string.h>
+
+// Struktura pro autora
+struct Autor {
     char jmeno[50];
     char prijmeni[50];
-    struct Adresa bydliste;
+};
+
+// Struktura pro knihu
+struct Kniha {
+    char nazev[100];
+    struct Autor autor;
+    int rokVydani;
+};
+
+int main() {
+    // Vytvoření instance struktury Kniha
+    struct Kniha kniha1;
+
+    // Inicializace hodnot
+    strcpy(kniha1.nazev, "Pánský klub");
+    strcpy(kniha1.autor.jmeno, "Chuck");
+    strcpy(kniha1.autor.prijmeni, "Palahniuk");
+    kniha1.rokVydani = 1996;
+
+    // Výpis informací o knize
+    printf("Název knihy: %s\n", kniha1.nazev);
+    printf("Autor: %s %s\n", kniha1.autor.jmeno, kniha1.autor.prijmeni);
+    printf("Rok vydání: %d\n", kniha1.rokVydani);
+
+    return 0;
 }
 ```
 
@@ -467,3 +491,87 @@ ptrOsoba->vek = 20;
 strcpy(ptrOsoba->jmeno, "Pepa");
 ```
 
+## ENUM
+
+> zkratka pro enumerace
+>
+> Enumerace umožňují vytvářet srozumitelný kód tím, že pojmenují hodnoty, které mohou mít pouze omezený počet různých variant
+>
+
+### definice ENUM
+> seznam konstant
+>
+> nulté indexování jako u polí
+
+```c
+enum Dny { Pondeli, Utery, Streda, Ctvrtek, Patek, Sobota, Nedele };
+```
+
+### použití ENUMu
+
+> deklarace proměnné typu enum
+
+```c
+enum Dny dnes = Pondeli;
+```
+
+### explicitní přiřazení hodnot
+
+```c
+enum Dny { Pondeli = 1, Utery = 2, Streda = 3, Ctvrtek = 4, Patek = 5, Sobota = 6, Nedele = 7 };
+```
+
+## UNION
+
+> umožňuje sdílet stejnou oblast paměti pro více datových typů
+>
+> může uchovat pouze jednu hodnotu ze svých členů najednou
+
+### práce s UNIONem
+
+```c
+union MojeUnion {
+    int celeCislo;
+    double desetinneCislo;
+    char retezec[20];
+};
+
+union MojeUnion u;
+u.celeCislo = 42;
+
+printf("Cele cislo: %d\n", u.celeCislo);
+printf("Velikost unionu: %lu bytu\n", sizeof(union MojeUnion));
+```
+
+### výhody
+
+> šetří paměť
+>
+> využívá se při komunikaci s hardwarem, nebo při práci s binárními daty
+>
+> převod mezi datovými typy nebo ukládání různých typů v jednom datovém bloku
+
+```c
+#include <stdio.h>
+
+union Hodnota {
+    int celeCislo;
+    double desetinneCislo;
+    char znak;
+};
+
+int main() {
+    union Hodnota v;
+
+    v.celeCislo = 42;
+    printf("Cele cislo: %d\n", v.celeCislo);
+
+    v.desetinneCislo = 3.14159; // vždy dojde k přepsání hodnoty, pracuje se s jedným datovým typem v daný okamžik
+    printf("Desetinne cislo: %lf\n", v.desetinneCislo);
+
+    v.znak = 'A';
+    printf("Znak: %c\n", v.znak);
+
+    return 0;
+}
+```
