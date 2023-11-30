@@ -1,5 +1,48 @@
 # C
 
+- [C](#c)
+  - [Úvod](#úvod)
+  - [Základy](#základy)
+    - [Preprocesor](#preprocesor)
+    - [Kompilátor](#kompilátor)
+    - [Linker](#linker)
+    - [Knihovny](#knihovny)
+    - [Proměnné](#proměnné)
+      - [Lokální](#lokální)
+      - [Globální](#globální)
+      - [Dynamické](#dynamické)
+    - [Základní funkce](#základní-funkce)
+      - [Vstupně-výstupní funkce:](#vstupně-výstupní-funkce)
+      - [Práce s pamětí:](#práce-s-pamětí)
+      - [Matematické:](#matematické)
+      - [Matematické a logické operátory](#matematické-a-logické-operátory)
+      - [Řídící struktury:](#řídící-struktury)
+      - [Práce s časem](#práce-s-časem)
+    - [Generování čísel](#generování-čísel)
+    - [Oblasti paměti](#oblasti-paměti)
+      - [Halda (Heap)](#halda-heap)
+      - [Zásobník (Stack)](#zásobník-stack)
+  - [Ukazatele (Pointer)](#ukazatele-pointer)
+    - [Vlastnosti ukazatelů](#vlastnosti-ukazatelů)
+  - [Pole](#pole)
+    - [Základní operace s poli](#základní-operace-s-poli)
+  - [Řetězce (String)](#řetězce-string)
+  - [Struktury](#struktury)
+    - [Deklarování struktur](#deklarování-struktur)
+      - [Použití typedef](#použití-typedef)
+      - [Struktura ve struktuře](#struktura-ve-struktuře)
+    - [Přístup k hodnotám ze struktury](#přístup-k-hodnotám-ze-struktury)
+  - [ENUM](#enum)
+    - [definice ENUM](#definice-enum)
+    - [použití ENUMu](#použití-enumu)
+    - [explicitní přiřazení hodnot](#explicitní-přiřazení-hodnot)
+  - [UNION](#union)
+    - [práce s UNIONem](#práce-s-unionem)
+    - [výhody](#výhody)
+  - [Práce se soubory](#práce-se-soubory)
+    - [Ukázka kódu](#ukázka-kódu)
+
+
 ## Úvod
 
 > Kompilovaný jazyk
@@ -11,8 +54,41 @@
 > Možné využití ukazatelů
 > 
 > Má preprocesor, to umožňuje použití maker
+>
+> identifikátor = jakýkoliv název (proměnná, funkce, makro...)
 
 ## Základy
+
+### Preprocesor
+
+> kód bere jako text
+>
+> Odstraňuje poznámky
+>
+> zpracovává vše začínající `#`
+
+**Hlavičkový soubor**
+
+> Textový soubor
+>
+> Obsahuje příkazy pro preprocesor
+
+### Kompilátor
+
+> Řeší syntatické chyby
+
+### Linker
+
+> Zpracuje zkompilovaný kód
+>
+> Vytváří .EXE soubor
+>
+> Řeší logické chyby
+
+### Knihovny
+
+`#include <stdio.h>` - uloženo na místě nainstalování kompilátoru
+`#include "mojeknohovna.h"` - uloženo rámci projektu
 
 ### Proměnné
 
@@ -23,6 +99,18 @@
 > Deklarují se rámci bloku, existují pouze v daném bloku (ohraničen {})
 >
 > Každá instance funkce, nebo rekurzivní volání ma svou sadu lokálních proměnných
+
+#### Globální
+
+> Deklarace mimo jakoukoliv funkci
+>
+> Platí rámci všech funkcí od místa deklarování
+
+|Název|Viditelnost|Platnost|Deklarace|
+|:---:|---|---|---|
+|auto|funkce/blok deklarace|po dobu běhu funkce/bloku|`výchozí typ`|
+|intern|funkce/blok deklarace, přednost před extern|po dobu běhu programu (nenastavuje se původní hodnota)|`static`|
+|extern|celý program, i mezi soubory|po dobu běhu programu, mezi všemi soubory|`extern`|
 
 #### Dynamické
 
@@ -44,13 +132,13 @@
   |char|znak|
   |bool|logické hodnoty|
   
-### Funkce
+### Základní funkce
 
 #### Vstupně-výstupní funkce:
 
-`printf` - Výpis do konzole
+`printf()` - Výpis do konzole
 
-`scanf` - Čtení z konzole
+`scanf()` - Čtení z konzole
 
 `getchar()` - Načte jedno znakové vstupní písmeno ze standardního vstupu.
 
@@ -82,15 +170,23 @@
 
 `rand()` - Generování celých náhodných čísel
 
-#### Matematické a logické operace:
+#### Matematické a logické operátory
+`+, -, *, /, %` - Aritmetické
 
-`+, -, *, /, %` - Aritmetické operace
+`++, --` - Přirovnávací 
 
-`++, --` - Přičítání a odčítání
+```c
+int i = 5, a = 3;
+i++; // i = 6
+++i; // i = 6
 
-`==, !=, >, <, >=, <=` - Porovnávací operace
+a = a + ++i; // a = 9
+a = a + i++; // a = 8, i se zvětší až po použití ve výpočtu
+```
 
-`&&, ||, !` - Logické operace
+`==, !=, >, <, >=, <=` - Relační
+
+`&&, ||, !` - Logické
 
 #### Řídící struktury:
 
@@ -243,7 +339,7 @@ ptr++; // Inkrementace ukazatele ptr
     
 ```c
 int *ptr = NULL; // Inicializace ukazatele jako null ukazatel
-```****
+```
 
 ## Pole 
 
@@ -376,6 +472,10 @@ strncmp(str1, str2, n);
 ```c
 char *ptr = strstr(str, substr);
 ```
+
+## Funkce
+
+>
 
 ## Struktury
 
